@@ -474,37 +474,35 @@ export default function IncidentDemo() {
   const sc = statusConfig[step.status];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14">
+    <div className="h-screen flex flex-col bg-background overflow-hidden">
+      {/* Header — fixed */}
+      <div className="shrink-0 bg-background border-b border-border z-50">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-12">
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="flex items-center gap-1.5 text-muted hover:text-foreground transition-colors text-sm"
+                className="flex items-center gap-1.5 text-muted hover:text-foreground transition-colors text-xs"
               >
-                <ArrowLeft size={16} />
+                <ArrowLeft size={14} />
                 <span className="hidden sm:inline">Back</span>
               </Link>
-              <div className="w-px h-5 bg-border" />
-              <div>
-                <span className="text-sm font-semibold">
-                  Incident Resolution Demo
-                </span>
-                <span className="hidden sm:inline text-xs text-muted ml-2">
-                  INC-2024-7891
-                </span>
-              </div>
+              <div className="w-px h-4 bg-border" />
+              <span className="text-xs font-semibold">
+                Incident Resolution Demo
+              </span>
+              <span className="hidden sm:inline text-[10px] text-muted font-mono">
+                INC-2024-7891
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${sc.badge}`}
+                className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium ${sc.badge}`}
               >
                 <span className={`w-1.5 h-1.5 rounded-full ${sc.dot}`} />
                 {sc.label}
               </span>
-              <span className="text-xs text-muted font-mono">
+              <span className="text-[10px] text-muted font-mono">
                 {step.timestamp}
               </span>
             </div>
@@ -512,20 +510,19 @@ export default function IncidentDemo() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Step indicators — horizontal scroll on mobile */}
-        <div className="mb-8 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex gap-1 min-w-max">
+      {/* Step indicators — fixed */}
+      <div className="shrink-0 border-b border-border bg-background">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="flex gap-0.5 py-2 overflow-x-auto">
             {steps.map((s, i) => {
               const SIcon = s.icon;
-              const ssc = statusConfig[s.status];
               const isActive = i === current;
               const isPast = i < current;
               return (
                 <button
                   key={s.id}
                   onClick={() => setCurrent(i)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all whitespace-nowrap ${
                     isActive
                       ? "bg-foreground text-background"
                       : isPast
@@ -533,230 +530,241 @@ export default function IncidentDemo() {
                       : "text-muted hover:text-foreground hover:bg-card"
                   }`}
                 >
-                  <SIcon size={14} />
-                  <span className="hidden lg:inline">{s.title}</span>
-                  <span className="lg:hidden">{i + 1}</span>
+                  <SIcon size={12} />
+                  <span className="hidden xl:inline">{s.title}</span>
+                  <span className="xl:hidden">{i + 1}</span>
                 </button>
               );
             })}
           </div>
         </div>
+      </div>
 
-        {/* Main content */}
+      {/* Main content — fills remaining viewport */}
+      <div className="flex-1 min-h-0 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="h-full flex flex-col"
           >
-            {/* Step header */}
-            <div className="mb-8">
-              <div className="flex items-start gap-4">
-                <div
-                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${sc.bg} ${sc.border} border`}
-                >
-                  <Icon size={24} className={`${sc.badge.split(" ")[1]}`} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs text-muted font-mono">
-                      Step {step.id} of {steps.length}
-                    </span>
-                    <span className="text-xs text-muted">•</span>
-                    <span className="text-xs text-muted font-mono">
-                      {step.timestamp}
-                    </span>
-                  </div>
-                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                    {step.title}
-                  </h1>
-                  <p className="text-muted mt-1">{step.subtitle}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Left column — narrative + terminal */}
-              <div className="lg:col-span-2 space-y-6">
-                {/* Description */}
-                <div className="p-6 rounded-2xl border border-border bg-card/50">
-                  <p className="text-sm leading-relaxed text-foreground/80">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Terminal output */}
-                <div className="rounded-2xl border border-border bg-[#1e1e1e] overflow-hidden">
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
-                    <Terminal size={14} className="text-white/40" />
-                    <span className="text-xs text-white/40 font-mono">
-                      devin — session dvn-8f3a2c
-                    </span>
-                  </div>
-                  <div className="p-4 font-mono text-xs leading-6 text-green-400/90 overflow-x-auto">
-                    {step.terminal.map((line, j) => (
-                      <motion.div
-                        key={j}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2, delay: 0.05 * j }}
-                        className={
-                          line.includes("⚠") || line.includes("ALERT")
-                            ? "text-red-400"
-                            : line.includes("✓") || line.includes("PASSED")
-                            ? "text-emerald-400"
-                            : line.includes("ROOT CAUSE") ||
-                              line.includes("Assessment:")
-                            ? "text-amber-400 font-semibold"
-                            : line.startsWith("$ ")
-                            ? ""
-                            : "text-white/50"
-                        }
-                      >
-                        {line}
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Outcome */}
-                <div
-                  className={`p-5 rounded-2xl border ${sc.border} ${sc.bg}`}
-                >
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2
-                      size={18}
-                      className={`shrink-0 mt-0.5 ${
-                        sc.badge.split(" ")[1]
-                      }`}
-                    />
-                    <div>
-                      <h3 className="text-sm font-semibold mb-1">Outcome</h3>
-                      <p className="text-sm text-foreground/70">
-                        {step.outcome}
+            <div className="flex-1 min-h-0 max-w-[1400px] mx-auto w-full px-4 sm:px-6 py-4">
+              <div className="h-full grid grid-cols-1 lg:grid-cols-12 gap-4">
+                {/* Left column — step info + terminal */}
+                <div className="lg:col-span-7 flex flex-col min-h-0 gap-3">
+                  {/* Step header — compact */}
+                  <div className="shrink-0 flex items-start gap-3">
+                    <div
+                      className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${sc.bg} ${sc.border} border`}
+                    >
+                      <Icon
+                        size={18}
+                        className={`${sc.badge.split(" ")[1]}`}
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h1 className="text-lg font-bold tracking-tight">
+                          {step.title}
+                        </h1>
+                        <span className="text-[10px] text-muted font-mono shrink-0">
+                          {step.id}/{steps.length}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted mt-0.5 line-clamp-2">
+                        {step.description}
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Right column — regulatory mapping */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Building2 size={16} className="text-accent" />
-                  <h2 className="text-sm font-semibold">
-                    Regulatory Mapping
-                  </h2>
-                </div>
-
-                {step.regulatoryMappings.map((reg, j) => (
-                  <motion.div
-                    key={j}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 * j }}
-                    className="p-4 rounded-xl border border-border bg-card/50"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-accent/10 text-accent">
-                        {reg.framework}
-                      </span>
-                      <span className="text-xs font-semibold text-foreground/70">
-                        {reg.article}
+                  {/* Terminal — scrollable, fills space */}
+                  <div className="flex-1 min-h-0 rounded-xl border border-border bg-[#1e1e1e] overflow-hidden flex flex-col">
+                    <div className="shrink-0 flex items-center gap-2 px-3 py-2 border-b border-white/10">
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+                      </div>
+                      <Terminal size={12} className="text-white/30 ml-2" />
+                      <span className="text-[10px] text-white/30 font-mono">
+                        devin — dvn-8f3a2c
                       </span>
                     </div>
-                    <p className="text-xs leading-relaxed text-muted">
-                      {reg.requirement}
-                    </p>
-                  </motion.div>
-                ))}
-
-                {/* Compliance status card */}
-                <div className="p-4 rounded-xl border border-accent/20 bg-accent/[0.04]">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Shield size={14} className="text-accent" />
-                    <span className="text-xs font-semibold text-accent">
-                      Compliance Status
-                    </span>
+                    <div className="flex-1 min-h-0 overflow-y-auto p-3 font-mono text-[11px] leading-5 text-green-400/90">
+                      {step.terminal.map((line, j) => (
+                        <motion.div
+                          key={j}
+                          initial={{ opacity: 0, x: -6 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.15, delay: 0.04 * j }}
+                          className={
+                            line.includes("⚠") || line.includes("ALERT")
+                              ? "text-red-400"
+                              : line.includes("✓") || line.includes("PASSED")
+                              ? "text-emerald-400"
+                              : line.includes("ROOT CAUSE") ||
+                                line.includes("Assessment:")
+                              ? "text-amber-400 font-semibold"
+                              : line.startsWith("$ ")
+                              ? ""
+                              : "text-white/50"
+                          }
+                        >
+                          {line}
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted">Audit trail</span>
-                      <span className="text-emerald-600 font-medium flex items-center gap-1">
-                        <CheckCircle2 size={12} /> Complete
+
+                  {/* Outcome — compact bar */}
+                  <div
+                    className={`shrink-0 px-3 py-2.5 rounded-lg border ${sc.border} ${sc.bg} flex items-start gap-2`}
+                  >
+                    <CheckCircle2
+                      size={14}
+                      className={`shrink-0 mt-0.5 ${sc.badge.split(" ")[1]}`}
+                    />
+                    <p className="text-xs text-foreground/70 leading-relaxed">
+                      <span className="font-semibold text-foreground/90">
+                        Outcome:{" "}
+                      </span>
+                      {step.outcome}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right column — regulatory mapping, scrollable */}
+                <div className="lg:col-span-5 flex flex-col min-h-0 gap-3">
+                  <div className="shrink-0 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Building2 size={14} className="text-accent" />
+                      <h2 className="text-xs font-semibold">
+                        Regulatory Mapping
+                      </h2>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Shield size={12} className="text-accent" />
+                      <span className="text-[10px] text-accent font-medium">
+                        {current * 6 + 5} actions logged
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted">Evidence preserved</span>
-                      <span className="text-emerald-600 font-medium flex items-center gap-1">
-                        <CheckCircle2 size={12} /> Verified
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted">Actions logged</span>
-                      <span className="text-foreground/70 font-mono">
-                        {current * 6 + 5} actions
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted">Elapsed</span>
-                      <span className="text-foreground/70 font-mono">
-                        {step.timestamp}
-                      </span>
+                  </div>
+
+                  {/* Regulatory cards — scrollable */}
+                  <div className="flex-1 min-h-0 overflow-y-auto space-y-2.5 pr-1">
+                    {step.regulatoryMappings.map((reg, j) => (
+                      <motion.div
+                        key={j}
+                        initial={{ opacity: 0, x: 12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.25, delay: 0.08 * j }}
+                        className="p-3 rounded-lg border border-border bg-card/50"
+                      >
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-accent/10 text-accent">
+                            {reg.framework}
+                          </span>
+                          <span className="text-[11px] font-semibold text-foreground/70">
+                            {reg.article}
+                          </span>
+                        </div>
+                        <p className="text-[11px] leading-relaxed text-muted">
+                          {reg.requirement}
+                        </p>
+                      </motion.div>
+                    ))}
+
+                    {/* Compliance status */}
+                    <div className="p-3 rounded-lg border border-accent/20 bg-accent/[0.04]">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Shield size={12} className="text-accent" />
+                        <span className="text-[10px] font-semibold text-accent uppercase tracking-wide">
+                          Compliance Status
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-y-1.5 gap-x-4">
+                        <div className="flex items-center justify-between text-[10px]">
+                          <span className="text-muted">Audit trail</span>
+                          <span className="text-emerald-600 font-medium flex items-center gap-0.5">
+                            <CheckCircle2 size={10} /> OK
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-[10px]">
+                          <span className="text-muted">Evidence</span>
+                          <span className="text-emerald-600 font-medium flex items-center gap-0.5">
+                            <CheckCircle2 size={10} /> OK
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-[10px]">
+                          <span className="text-muted">Actions</span>
+                          <span className="text-foreground/70 font-mono">
+                            {current * 6 + 5}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-[10px]">
+                          <span className="text-muted">Elapsed</span>
+                          <span className="text-foreground/70 font-mono">
+                            {step.timestamp}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-10 pt-6 border-t border-border">
-              <button
-                onClick={() => setCurrent(Math.max(0, current - 1))}
-                disabled={current === 0}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-card"
-              >
-                <ArrowLeft size={16} />
-                Previous
-              </button>
-
-              <div className="flex gap-1.5">
-                {steps.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrent(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      i === current
-                        ? "bg-accent w-6"
-                        : i < current
-                        ? "bg-foreground/30"
-                        : "bg-border"
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {current < steps.length - 1 ? (
+            {/* Navigation — fixed bottom */}
+            <div className="shrink-0 border-t border-border bg-background">
+              <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between">
                 <button
-                  onClick={() =>
-                    setCurrent(Math.min(steps.length - 1, current + 1))
-                  }
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-white text-sm font-medium hover:bg-accent-soft transition-all"
+                  onClick={() => setCurrent(Math.max(0, current - 1))}
+                  disabled={current === 0}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-card"
                 >
-                  Next Step
-                  <ArrowRight size={16} />
+                  <ArrowLeft size={14} />
+                  Previous
                 </button>
-              ) : (
-                <Link
-                  href="/"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-white text-sm font-medium hover:bg-accent-soft transition-all"
-                >
-                  Back to Overview
-                  <ChevronRight size={16} />
-                </Link>
-              )}
+
+                <div className="flex gap-1">
+                  {steps.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrent(i)}
+                      className={`h-1.5 rounded-full transition-all ${
+                        i === current
+                          ? "bg-accent w-5"
+                          : i < current
+                          ? "bg-foreground/30 w-1.5"
+                          : "bg-border w-1.5"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {current < steps.length - 1 ? (
+                  <button
+                    onClick={() =>
+                      setCurrent(Math.min(steps.length - 1, current + 1))
+                    }
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-medium hover:bg-accent-soft transition-all"
+                  >
+                    Next Step
+                    <ArrowRight size={14} />
+                  </button>
+                ) : (
+                  <Link
+                    href="/"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-medium hover:bg-accent-soft transition-all"
+                  >
+                    Back to Overview
+                    <ChevronRight size={14} />
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
