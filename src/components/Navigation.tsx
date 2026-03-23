@@ -80,7 +80,7 @@ export default function Navigation() {
               className="flex items-center gap-3"
             >
               <Image
-                src="/logos/cognition.svg"
+                src="/logos/cognition.png"
                 alt="Cognition"
                 width={120}
                 height={28}
@@ -88,7 +88,7 @@ export default function Navigation() {
               />
               <span className="text-muted text-sm">×</span>
               <Image
-                src="/logos/socgen.svg"
+                src="/logos/socgen.png"
                 alt="Société Générale"
                 width={140}
                 height={36}

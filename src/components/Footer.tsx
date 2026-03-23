@@ -40,7 +40,7 @@ export default function Footer() {
         <div className="pt-12 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Image
-              src="/logos/cognition.svg"
+              src="/logos/cognition.png"
               alt="Cognition"
               width={100}
               height={24}
@@ -48,7 +48,7 @@ export default function Footer() {
             />
             <span className="text-muted text-xs">×</span>
             <Image
-              src="/logos/socgen.svg"
+              src="/logos/socgen.png"
               alt="Société Générale"
               width={120}
               height={30}

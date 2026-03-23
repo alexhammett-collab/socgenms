@@ -37,7 +37,7 @@ export default function Hero() {
           className="flex items-center justify-center gap-4 sm:gap-6 mb-8"
         >
           <Image
-            src="/logos/cognition.svg"
+            src="/logos/cognition.png"
             alt="Cognition"
             width={140}
             height={32}
@@ -45,7 +45,7 @@ export default function Hero() {
           />
           <div className="w-px h-8 bg-border" />
           <Image
-            src="/logos/socgen.svg"
+            src="/logos/socgen.png"
             alt="Société Générale"
             width={160}
             height={40}
