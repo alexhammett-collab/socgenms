@@ -230,13 +230,13 @@ export default function UseCases() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="use-cases" ref={ref} className="py-24 sm:py-32 px-6">
+    <section id="use-cases" ref={ref} className="py-14 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-10"
         >
           <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">
             High-Impact Use Cases

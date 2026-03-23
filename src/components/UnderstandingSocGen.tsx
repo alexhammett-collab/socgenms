@@ -32,7 +32,7 @@ export default function UnderstandingSocGen() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="understanding" ref={ref} className="py-24 sm:py-32 px-6">
+    <section id="understanding" ref={ref} className="py-14 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,7 +45,7 @@ export default function UnderstandingSocGen() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
             The Operating Reality
           </h2>
-          <p className="text-muted text-base sm:text-lg max-w-2xl mb-16">
+          <p className="text-muted text-sm sm:text-base max-w-2xl mb-10">
             Before proposing any solution, we start with the constraints.
             These observations shape every recommendation that follows.
           </p>
@@ -60,7 +60,7 @@ export default function UnderstandingSocGen() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 * (i + 1) }}
-                className="group relative p-6 sm:p-8 rounded-2xl border border-border bg-card/50 hover:bg-card transition-all duration-300"
+                className="group relative p-5 sm:p-6 rounded-2xl border border-border bg-card/50 hover:bg-card hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">

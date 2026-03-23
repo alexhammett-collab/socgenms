@@ -27,13 +27,13 @@ export default function Credibility() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="credibility" ref={ref} className="py-24 sm:py-32 px-6">
+    <section id="credibility" ref={ref} className="py-14 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-10"
         >
           <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">
             Credibility
@@ -56,7 +56,7 @@ export default function Credibility() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.15 * (i + 1) }}
-                className="p-6 rounded-2xl border border-border bg-card/30"
+                className="p-5 rounded-2xl border border-border bg-card/30 hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
                   <Icon size={20} className="text-accent" />

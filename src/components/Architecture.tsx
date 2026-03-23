@@ -25,7 +25,7 @@ export default function Architecture() {
     <section
       id="architecture"
       ref={ref}
-      className="py-24 sm:py-32 px-6 relative"
+      className="py-14 sm:py-20 px-6 relative"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/[0.02] to-transparent pointer-events-none" />
       <div className="max-w-6xl mx-auto relative">
@@ -33,7 +33,7 @@ export default function Architecture() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-10"
         >
           <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">
             Architecture
@@ -67,7 +67,7 @@ export default function Architecture() {
               {cognitionLayer.map((item) => (
                 <div
                   key={item.name}
-                  className="p-4 rounded-xl bg-white border border-border"
+                  className="p-4 rounded-xl bg-white border border-border hover:border-accent/20 hover:shadow-md transition-all duration-300"
                 >
                   <h4 className="text-base font-semibold mb-1">{item.name}</h4>
                   <p className="text-muted text-xs">{item.desc}</p>
@@ -109,7 +109,7 @@ export default function Architecture() {
               {integrations.map((item) => (
                 <div
                   key={item.name}
-                  className="p-4 rounded-xl border border-border bg-white"
+                  className="p-4 rounded-xl border border-border bg-white hover:border-accent/20 hover:shadow-md transition-all duration-300"
                 >
                   <h4 className="text-sm font-semibold mb-0.5">{item.name}</h4>
                   <p className="text-muted text-xs">{item.desc}</p>

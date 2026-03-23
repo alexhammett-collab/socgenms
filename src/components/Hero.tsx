@@ -44,7 +44,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-6 text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed"
+          className="mt-5 text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed"
         >
           From legacy modernisation to incident resolution — Cognition
           introduces a new operating model for software delivery in regulated
@@ -55,7 +55,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-10"
+          className="mt-8"
         >
           <button
             onClick={() => {
