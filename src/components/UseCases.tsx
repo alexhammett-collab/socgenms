@@ -2,6 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+import Link from "next/link";
 import {
   AlertTriangle,
   RefreshCw,
@@ -12,6 +13,7 @@ import {
   BookOpen,
   Terminal,
   ChevronDown,
+  ArrowRight,
 } from "lucide-react";
 
 const useCases = [
@@ -19,6 +21,7 @@ const useCases = [
     icon: AlertTriangle,
     tag: "Devin — Event-Triggered",
     title: "Incident Resolution",
+    demoUrl: "/demo/incident-resolution",
     context:
       "High cost of downtime across interconnected services. Complex root cause analysis spanning distributed systems, legacy components, and multiple log sources.",
     value: [
@@ -204,6 +207,15 @@ function UseCaseCard({
                   </h4>
                   <p className="text-sm text-muted">{item.outcome}</p>
                 </div>
+                {(item as any).demoUrl && (
+                  <Link
+                    href={(item as any).demoUrl}
+                    className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-accent text-white text-xs font-semibold rounded-full hover:bg-accent-soft transition-all"
+                  >
+                    View Interactive Demo
+                    <ArrowRight size={14} />
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>
