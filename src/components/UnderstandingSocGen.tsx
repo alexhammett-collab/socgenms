@@ -1,0 +1,82 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Scale, Layers, TrendingDown, Shield } from "lucide-react";
+
+const insights = [
+  {
+    icon: Scale,
+    title: "Scale Meets Constraint",
+    body: "Société Générale operates across retail banking, investment banking (GBIS), and securities services — serving millions of clients across dozens of markets. Every technology decision must satisfy ECB oversight, Basel requirements, and local regulatory frameworks simultaneously. Scale here is not a vanity metric; it is a compounding constraint.",
+  },
+  {
+    icon: Layers,
+    title: "Legacy and Modern Coexist",
+    body: "The technology estate spans mainframe systems, distributed Java services, and emerging cloud-native workloads. This is not a deficiency — it is the reality of a 160-year-old institution that has continuously adapted. Any credible technology strategy must work across this hybrid landscape, not pretend it doesn't exist.",
+  },
+  {
+    icon: TrendingDown,
+    title: "Efficiency is a Strategic Imperative",
+    body: "Cost-to-income pressure is structural, not cyclical. Application rationalisation, platform consolidation, and reduction of duplication are not IT projects — they are board-level priorities. Every engineering investment must demonstrate measurable efficiency gains.",
+  },
+  {
+    icon: Shield,
+    title: "Control is Non-Negotiable",
+    body: "Audit trails, governance frameworks, and access controls are not friction — they are the operating license. Any technology introduced into this environment must be fully auditable, deterministic where required, and aligned with enterprise security posture from day one.",
+  },
+];
+
+export default function UnderstandingSocGen() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="understanding" ref={ref} className="py-24 sm:py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">
+            Understanding SocGen
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            The Operating Reality
+          </h2>
+          <p className="text-muted text-base sm:text-lg max-w-2xl mb-16">
+            Before proposing any solution, we start with the constraints.
+            These observations shape every recommendation that follows.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {insights.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 * (i + 1) }}
+                className="group relative p-6 sm:p-8 rounded-2xl border border-border bg-card/50 hover:bg-card transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Icon size={20} className="text-accent" />
+                  </div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                </div>
+                <p className="text-muted text-sm leading-relaxed">
+                  {item.body}
+                </p>
+                <div className="absolute inset-0 rounded-2xl border border-accent/0 group-hover:border-accent/20 transition-colors duration-300 pointer-events-none" />
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
