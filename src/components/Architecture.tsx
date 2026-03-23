@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 const cognitionLayer = [
   { name: "Windsurf", desc: "AI-native IDE — the interface layer" },
@@ -119,16 +120,26 @@ export default function Architecture() {
           </motion.div>
         </div>
 
-        {/* Key point */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 text-center text-muted text-sm max-w-xl mx-auto"
+        {/* Infrastructure image */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-6 rounded-2xl overflow-hidden border border-border relative h-40 sm:h-48"
         >
-          Every interaction logged. Every action auditable. Deployed within your
-          security perimeter — cloud or on-premises.
-        </motion.p>
+          <Image
+            src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80"
+            alt="Server infrastructure and data centre"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute bottom-4 left-5 right-5">
+            <p className="text-xs text-white/90 font-medium">
+              Every interaction logged. Every action auditable. Deployed within your security perimeter — cloud or on-premises.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

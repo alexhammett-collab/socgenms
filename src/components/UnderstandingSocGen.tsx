@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Scale, Layers, TrendingDown, Shield } from "lucide-react";
+import Image from "next/image";
 
 const insights = [
   {
@@ -49,6 +50,25 @@ export default function UnderstandingSocGen() {
             Before proposing any solution, we start with the constraints.
             These observations shape every recommendation that follows.
           </p>
+        </motion.div>
+
+        {/* Context image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-8 rounded-2xl overflow-hidden border border-border relative h-48 sm:h-56"
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1524230572899-a752b3835840?w=1200&q=80"
+            alt="Modern banking headquarters"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
+          <div className="absolute bottom-4 left-5 right-5">
+            <p className="text-xs text-foreground/70 font-medium">Universal bank across 67 countries · €25.1B revenue · 117,000 employees</p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

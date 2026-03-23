@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const ref = useRef(null);
@@ -37,10 +38,22 @@ export default function Footer() {
         </motion.div>
 
         <div className="pt-12 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-muted">
-            <span className="text-accent font-semibold">Cognition</span>
-            <span className="mx-1.5">×</span>
-            <span>Société Générale</span>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logos/cognition.svg"
+              alt="Cognition"
+              width={100}
+              height={24}
+              className="h-5 w-auto opacity-60"
+            />
+            <span className="text-muted text-xs">×</span>
+            <Image
+              src="/logos/socgen.svg"
+              alt="Société Générale"
+              width={120}
+              height={30}
+              className="h-6 w-auto opacity-60"
+            />
           </div>
           <p className="text-xs text-muted/60">
             Confidential — Prepared for strategic engagement purposes only.

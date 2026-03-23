@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -9,19 +10,55 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
     >
+      {/* Background image — La Défense */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
+          alt="Modern glass skyscraper — La Défense, Paris"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-white/85" />
+      </div>
+
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      
+
       {/* Accent glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/8 rounded-full blur-[120px]" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Partner logos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="flex items-center justify-center gap-4 sm:gap-6 mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border text-xs text-muted mb-8">
+          <Image
+            src="/logos/cognition.svg"
+            alt="Cognition"
+            width={140}
+            height={32}
+            className="h-7 sm:h-8 w-auto"
+          />
+          <div className="w-px h-8 bg-border" />
+          <Image
+            src="/logos/socgen.svg"
+            alt="Société Générale"
+            width={160}
+            height={40}
+            className="h-8 sm:h-9 w-auto"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-white/60 backdrop-blur-sm text-xs text-muted mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
             Strategic Engagement Brief
           </div>
@@ -63,7 +100,7 @@ export default function Hero() {
                 .getElementById("understanding")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-soft text-white text-sm font-semibold rounded-full transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-soft text-white text-sm font-semibold rounded-full transition-all duration-200 shadow-lg shadow-accent/20"
           >
             Explore the Hypothesis
             <ArrowDown

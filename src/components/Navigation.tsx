@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const sections = [
   { id: "hero", label: "Overview" },
@@ -76,11 +77,23 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-14">
             <button
               onClick={() => scrollTo("hero")}
-              className="text-sm font-semibold tracking-tight"
+              className="flex items-center gap-3"
             >
-              <span className="text-accent">Cognition</span>
-              <span className="text-muted mx-1.5">×</span>
-              <span className="text-foreground">Société Générale</span>
+              <Image
+                src="/logos/cognition.svg"
+                alt="Cognition"
+                width={120}
+                height={28}
+                className="h-6 w-auto"
+              />
+              <span className="text-muted text-sm">×</span>
+              <Image
+                src="/logos/socgen.svg"
+                alt="Société Générale"
+                width={140}
+                height={36}
+                className="h-7 w-auto"
+              />
             </button>
 
             {/* Desktop nav */}
